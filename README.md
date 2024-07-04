@@ -30,7 +30,7 @@ To get started with this project, clone the repository and install the dependenc
 git clone https://github.com/Tahir1072a/MaterialUI_Examples.git
 cd MaterialUI_Examples
 npm install
-
+```
 # Usage
 After installing the dependencies, you can start the development server using:  npm start
 
