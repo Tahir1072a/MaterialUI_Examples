@@ -10,7 +10,7 @@ const Options = {
 };
 
 const TabBoxStyle = {
-  width: "25rem",
+  width: "30rem",
 };
 
 export function ScrollableTab() {
@@ -19,7 +19,7 @@ export function ScrollableTab() {
       <TabsWrapper additionalOptions={Options}>
         <Tab label={"Tab 1"} />
         <Tab label={"Tab 2"} />
-        <Tab label={"Tab 3"} />
+        <Tab label={"Tab 3"} disabled />
       </TabsWrapper>
 
       <TabPanel index={0}>Hello World</TabPanel>

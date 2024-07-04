@@ -7,8 +7,6 @@ const TabBox = styled(Box)(({ theme }) => ({
 
   padding: theme.spacing(2),
   gap: theme.spacing(2),
-
-  background: "#dad5a5",
 }));
 
 const CustomPanel = styled(Box)(({ theme }) => ({
