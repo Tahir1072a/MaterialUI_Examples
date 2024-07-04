@@ -2,6 +2,7 @@ import SimpleTab from "./Components/Tabs/SimpleTab.jsx";
 import { styled } from "@mui/material";
 import { ScrollableTab } from "./Components/Tabs/TabFeatures.jsx";
 import SimpleTabStyled from "./Components/Tabs/SimpleTabStyled.jsx";
+import NestedTabs from "./Components/Tabs/NestedTabs.jsx";
 
 const Main = styled("main")(({ theme }) => ({
   display: "flex",
@@ -15,7 +16,7 @@ const Main = styled("main")(({ theme }) => ({
 function App() {
   return (
     <Main>
-      <SimpleTabStyled />
+      <NestedTabs />
     </Main>
   );
 }
