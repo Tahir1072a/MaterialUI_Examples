@@ -3,6 +3,12 @@ import { styled } from "@mui/material";
 import { ScrollableTab } from "./Components/Tabs/TabFeatures.jsx";
 import SimpleTabStyled from "./Components/Tabs/SimpleTabStyled.jsx";
 import NestedTabs from "./Components/Tabs/NestedTabs.jsx";
+import {
+  BasicTextField,
+  ControlledTextField,
+  UnControlledTextField,
+} from "./Components/Inputs/InputFeatures.jsx";
+import CompleteTextField from "./Components/Inputs/TextFieldFeatures.jsx";
 
 const Main = styled("main")(({ theme }) => ({
   display: "flex",
@@ -16,7 +22,7 @@ const Main = styled("main")(({ theme }) => ({
 function App() {
   return (
     <Main>
-      <NestedTabs />
+      <CompleteTextField />
     </Main>
   );
 }
