@@ -5,8 +5,6 @@ export const CustomGlobalCss = {
     boxSizing: "border-box",
     padding: "0",
     margin: "0",
-
-    transition: "all 0.3s",
   },
   html: {
     fontSize: "62.5%",

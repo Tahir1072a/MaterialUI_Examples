@@ -34,6 +34,7 @@ const PanelStyle = {
   borderRadius: "0 0 1.2rem 1.2rem",
 };
 
+// Tab düğmelerini saran wrapper
 const NestedTabsStyle = {
   display: "flex",
   alignItems: "center",
@@ -44,7 +45,7 @@ const NestedTabsStyle = {
   borderRadius: "1.2rem",
 
   "& .MuiTabs-indicator": {
-    height: "0",
+    height: 0,
   },
 };
 
