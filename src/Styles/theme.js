@@ -44,7 +44,7 @@ const theme = createTheme({
   },
   borders: {
     primary: `1px solid rgba(255, 255, 255, 0.16)`,
-    secondary: `1px solid rgba(51, 55, 64, 100)`,
+    secondary: `1px solid #B2651E`,
     primaryLinkUnderline: "underline 2px rgba(255, 255, 255, 0.92)",
   },
   spacing: (factor) => `${factor * 0.25}rem`,

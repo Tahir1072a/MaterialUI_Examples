@@ -1,5 +1,18 @@
 import { Controller } from "react-hook-form";
-import { TextField } from "@mui/material";
+import { styled, TextField } from "@mui/material";
+
+const CustomTextField = styled(TextField)(({ theme }) => ({
+  "& input[type=number]": {
+    "::-webkit-outer-spin-button": {
+      WebkitAppearance: "none",
+      margin: 0,
+    },
+    "::-webkit-inner-spin-button": {
+      WebkitAppearance: "none",
+      margin: 0,
+    },
+  },
+}));
 
 /**
  * Material UI kütüphaensine ait, TextField componentini kullanan ve kullanıcıdan basit girişler almayı sağlayan bir bileşen.
@@ -7,31 +20,41 @@ import { TextField } from "@mui/material";
  * @param control
  * @param rules
  * @param errors
- * @param type
+ * @param spinButtonActive - type="number" ,ken spin buttonlarının (arttırma-azalatma) aktif olup olmadığını belirler.
+ * @param textFieldOptions
  * @returns {JSX.Element}
  * @constructor
  */
 export default function UserInput({
-  name,
+  name = "",
   control,
   rules,
   errors,
-  Component = <TextField />,
+  spinButtonActive,
   textFieldOptions,
 }) {
   return (
     <Controller
-      render={({ field }) => (
-        <Component
-          {...field}
-          error={!errors.name}
-          helperText={errors.name ? errors.name.message : null}
-          {...textFieldOptions}
-        />
-      )}
       name={name}
       control={control}
-      rules={{ ...rules }}
+      rules={rules}
+      render={({ field }) =>
+        spinButtonActive ? (
+          <TextField
+            {...field}
+            error={Boolean(errors[name])}
+            helperText={errors[name] ? errors[name].message : null}
+            {...textFieldOptions}
+          />
+        ) : (
+          <CustomTextField
+            {...field}
+            {...textFieldOptions}
+            error={Boolean(errors[name])}
+            helperText={errors[name] ? errors[name].message : null}
+          />
+        )
+      }
     ></Controller>
   );
 }

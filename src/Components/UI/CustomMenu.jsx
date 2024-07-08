@@ -1,22 +1,19 @@
-import {
-  Button,
-  ClickAwayListener,
-  Grow,
-  Paper,
-  Popper,
-  Stack,
-} from "@mui/material";
+import { ClickAwayListener, Grow, Paper, Popper, Stack } from "@mui/material";
 import { useRef, useState } from "react";
 
 export default function CustomMenu({
   children,
   renderButton,
+  placement = "bottom",
+  transformOrigin = "left top",
   transitionTimeout = 300,
 }) {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef();
 
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
   const handleOpen = () => setOpen(true);
 
   return (
@@ -35,7 +32,7 @@ export default function CustomMenu({
         /* Anchor el hangi elemente göre render edileceğini belirler. */
         anchorEl={anchorRef.current}
         /*Anchoer el ile belirlenen bileşeni neresinde render edileceğini belirler*/
-        placement={"bottom"}
+        placement={placement}
         /*Bu prop animasyon işlevlerinin çalışmasını sağlamaya yarar*/
         transition
       >
@@ -45,14 +42,16 @@ export default function CustomMenu({
             {...TransitionProps}
             timeout={transitionTimeout}
             style={{
-              transformOrigin: "left top",
+              transformOrigin: transformOrigin,
             }}
           >
-            <Paper>
+            <Paper sx={{ display: "flex" }}>
               {/*  Bu component içine aldığı bileşenlerin dışına tıklanıp tıklanmadığını tespit eder. */}
               <ClickAwayListener onClickAway={handleClose}>
                 {/*  Açılır menu içinde yer alacak bileşenimiz buraya gelecektir. */}
-                {children}
+                {/*  Div içine sarıyoruz çünkü, ClickAwayListener dışa tıklamayı ref üzerinden yapıyor. Ve childrena bir ref geçiremez ise çalışmıyor. */}
+                {/*  Div gibi html elementlerinden bu sorun ortadan kalkıyor çünkü onlara rahatlıkla ref geçirebilyor.*/}
+                <div>{children}</div>
               </ClickAwayListener>
             </Paper>
           </Grow>

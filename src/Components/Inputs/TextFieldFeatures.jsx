@@ -63,6 +63,8 @@ export default function CompleteTextField() {
                   variant={"filled"}
                   label={"Last Name"}
                   id={"filled-disabled"}
+                  {/*Bileşen kontrol edilmediğinde işe yarar.*/}
+                  defaultValue={"Fidan"}
                   /* disabled: Ui tırtıklı hale geliyor */
                   disabled
                 />

@@ -113,7 +113,7 @@ export function ControlledTextField() {
   console.log(watch("firstName"));
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} id={"my-form"}>
       <Stack gap={theme.spacing(4)}>
         {/*Controller UI olarak hiçbir etkisi yoktur. Sadece hazır bileşenleri kontrol etmeyi kolaylaştırır.*/}
         <Controller
@@ -128,7 +128,10 @@ export function ControlledTextField() {
 
         <p>{errors.firstName?.message}</p>
 
-        <button type={"submit"}>Gönder</button>
+        {/*  Form özelliğini spesifik bir formu submit etmek için kullanabiliriz.*/}
+        <button type={"submit"} form={"my-form"}>
+          Gönder
+        </button>
       </Stack>
     </form>
   );

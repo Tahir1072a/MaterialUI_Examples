@@ -3,9 +3,13 @@ import TabContext, {
   TabPanel,
   TabsWrapper,
 } from "../../Components/Tabs/ReusableTab.jsx";
-import { Box, Stack, styled, Tab } from "@mui/material";
+import { Box, Button, IconButton, Stack, styled, Tab } from "@mui/material";
 import theme from "../../Styles/theme.js";
 import { createContext } from "react";
+import CustomMenu from "../../Components/UI/CustomMenu.jsx";
+import TradeOptions from "./TradeOptions.jsx";
+import { CgOptions } from "react-icons/cg";
+import UserInput from "../../Components/UI/UserInput.jsx";
 
 const TabsStyle = {
   display: "flex",
@@ -49,21 +53,44 @@ export default function Trade() {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      slippageToleranceV1: 0.5,
+      slippageToleranceV2: 0.05,
+      deadline: 30,
+    },
+  });
 
   const onSubmit = (data) => console.log(data);
 
   return (
     <TradeContext.Provider value={{ control, register, errors }}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form id={"trade-form"} onSubmit={handleSubmit(onSubmit)}>
         <Stack>
           <Box>
             <TabContext>
-              <Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
                 <TabsWrapper tabsStyle={TabsStyle}>
                   <StyledTab label={"Swap"} />
                   <StyledTab label={"Place Order"} />
                 </TabsWrapper>
+
+                <CustomMenu
+                  transformOrigin={"center"}
+                  renderButton={({ ref, onClick }) => (
+                    <IconButton ref={ref} onClick={onClick}>
+                      <CgOptions />
+                    </IconButton>
+                  )}
+                >
+                  <TradeOptions context={TradeContext} />
+                </CustomMenu>
               </Box>
 
               <TabPanel index={0}>Swap Content</TabPanel>
@@ -71,6 +98,7 @@ export default function Trade() {
             </TabContext>
           </Box>
         </Stack>
+        <button type={"submit"}>Submit</button>
       </form>
     </TradeContext.Provider>
   );

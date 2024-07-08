@@ -54,7 +54,7 @@ export default function ButtonFeatures() {
 
   return (
     <Stack spacing={theme.spacing(4)}>
-      <Button variant={"outlined"} disabled>
+      <Button variant={"outlined"} color={"primary"}>
         Outlined
       </Button>
       <Button variant={"contained"} endIcon={<MdDelete />}>
