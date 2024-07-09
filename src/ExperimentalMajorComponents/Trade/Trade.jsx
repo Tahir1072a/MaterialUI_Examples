@@ -53,18 +53,21 @@ export default function Trade() {
     handleSubmit,
     control,
     formState: { errors },
+    setValue,
   } = useForm({
     defaultValues: {
       slippageToleranceV1: 0.5,
       slippageToleranceV2: 0.05,
       deadline: 30,
+      safeMode: true,
+      dedicatedRPCs: false,
     },
   });
 
   const onSubmit = (data) => console.log(data);
 
   return (
-    <TradeContext.Provider value={{ control, register, errors }}>
+    <TradeContext.Provider value={{ control, register, errors, setValue }}>
       <form id={"trade-form"} onSubmit={handleSubmit(onSubmit)}>
         <Stack>
           <Box>

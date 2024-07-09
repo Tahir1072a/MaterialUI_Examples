@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Divider,
+  FormGroup,
   IconButton,
   InputAdornment,
   Stack,
@@ -13,6 +14,7 @@ import UserInput from "../../Components/UI/UserInput.jsx";
 import theme from "../../Styles/theme.js";
 import { LuBadgeInfo, LuBadgePercent } from "react-icons/lu";
 import CustomMenu from "../../Components/UI/CustomMenu.jsx";
+import ControlledSwitch from "../../Components/UI/Switch.jsx";
 
 const StyledStack = styled(Stack)(({ theme }) => ({
   display: "flex",
@@ -72,7 +74,11 @@ const deadlineOptions = {
 
 // Trade ile iligli ekstra ayarların yer aldığı bir sekme.
 export default function TradeOptions({ context }) {
-  const { control, errors } = useContext(context);
+  const { control, errors, setValue } = useContext(context);
+
+  function handleClick(name, value) {
+    setValue(name, value);
+  }
 
   return (
     <StyledStack padding={theme.spacing(4)}>
@@ -129,17 +135,29 @@ export default function TradeOptions({ context }) {
           </CustomMenu>
         </Box>
         <FlexBox>
-          <Button variant={"outlined"} color={"secondary"}>
+          <Button
+            variant={"outlined"}
+            color={"secondary"}
+            onClick={() => handleClick("slippageToleranceV1", 0.1)}
+          >
             <Typography variant={"h6"} color={theme.palette.text.secondary}>
               0.1%
             </Typography>
           </Button>
-          <Button variant={"outlined"} color={"secondary"}>
+          <Button
+            variant={"outlined"}
+            color={"secondary"}
+            onClick={() => handleClick("slippageToleranceV1", 0.5)}
+          >
             <Typography variant={"h6"} color={theme.palette.text.secondary}>
               0.5%
             </Typography>
           </Button>
-          <Button variant={"outlined"} color={"secondary"}>
+          <Button
+            variant={"outlined"}
+            color={"secondary"}
+            onClick={() => handleClick("slippageToleranceV1", 1)}
+          >
             <Typography variant={"h6"} color={theme.palette.text.secondary}>
               1%
             </Typography>
@@ -193,17 +211,29 @@ export default function TradeOptions({ context }) {
           </CustomMenu>
         </Box>
         <FlexBox>
-          <Button variant={"outlined"} color={"secondary"}>
+          <Button
+            variant={"outlined"}
+            color={"secondary"}
+            onClick={() => handleClick("slippageToleranceV2", 0.02)}
+          >
             <Typography variant={"h6"} color={theme.palette.text.secondary}>
               0.02%
             </Typography>
           </Button>
-          <Button variant={"outlined"} color={"secondary"}>
+          <Button
+            variant={"outlined"}
+            color={"secondary"}
+            onClick={() => handleClick("slippageToleranceV2", 0.05)}
+          >
             <Typography variant={"h6"} color={theme.palette.text.secondary}>
               0.05%
             </Typography>
           </Button>
-          <Button variant={"outlined"} color={"secondary"}>
+          <Button
+            variant={"outlined"}
+            color={"secondary"}
+            onClick={() => handleClick("slippageToleranceV2", 0.1)}
+          >
             <Typography variant={"h6"} color={theme.palette.text.secondary}>
               0.1%
             </Typography>
@@ -239,8 +269,30 @@ export default function TradeOptions({ context }) {
           />
         </Box>
       </StyledStack>
-      <Box></Box>
-      <Box></Box>
+      <Stack
+        sx={{
+          display: "flex",
+          width: "100%",
+        }}
+      >
+        <Typography variant={"h6"}>Safe Mode & Use Dedicated RPCs</Typography>
+        <FormGroup>
+          <ControlledSwitch
+            control={control}
+            name={"safeMode"}
+            label={"Prevent high price impact trades."}
+            switchOptions={{
+              sx: { marginLeft: "1.2rem" },
+            }}
+          />
+          <ControlledSwitch
+            control={control}
+            name={"dedicatedRPCs"}
+            label={"Use dedicated RPC endpoints, or disable to use public RPCs"}
+            switchOptions={{ sx: { marginLeft: "1.2rem" } }}
+          />
+        </FormGroup>
+      </Stack>
     </StyledStack>
   );
 }

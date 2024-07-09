@@ -49,7 +49,7 @@ const theme = createTheme({
   },
   spacing: (factor) => `${factor * 0.25}rem`,
   shape: {
-    borderRadius: "12.5px",
+    borderRadius: 12.5,
   },
   typography: {
     fontFamily: "'Poppins', 'Roboto', 'Arial', sans-serif",
