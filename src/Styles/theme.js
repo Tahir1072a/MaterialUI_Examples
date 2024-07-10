@@ -4,8 +4,8 @@ const theme = createTheme({
   palette: {
     mode: "dark",
     error: {
-      main: "#C53030",
-      light: "#FEB2B2",
+      main: "#B00020",
+      light: "#F86E6E",
     },
     whiteAlpha: {
       Alpha_50: "rgba(255, 255, 255, 0.04)",
@@ -60,6 +60,7 @@ const theme = createTheme({
       fontWeight: 600,
     },
     h4: {
+      fontSize: "2.5rem",
       fontFamily: "'Poppins', 'Roboto', 'Arial', sans-serif",
       fontWeight: 600,
     },

@@ -10,6 +10,7 @@ import CustomMenu from "../../Components/UI/CustomMenu.jsx";
 import TradeOptions from "./TradeOptions.jsx";
 import { CgOptions } from "react-icons/cg";
 import UserInput from "../../Components/UI/UserInput.jsx";
+import ExchangeForm from "./ExchangeForm.jsx";
 
 const TabsStyle = {
   display: "flex",
@@ -61,6 +62,10 @@ export default function Trade() {
       deadline: 30,
       safeMode: true,
       dedicatedRPCs: false,
+      exchangeFromAmount: "",
+      exchangeFromSelected: "",
+      exchangeToAmount: "",
+      exchangeToSeleted: "",
     },
   });
 
@@ -95,8 +100,15 @@ export default function Trade() {
                   <TradeOptions context={TradeContext} />
                 </CustomMenu>
               </Box>
-
-              <TabPanel index={0}>Swap Content</TabPanel>
+              {/* TODO: ExchangeForm için ilgili bileşenler hazırlanacak. */}
+              <TabPanel index={0}>
+                <ExchangeForm
+                  control={control}
+                  errors={errors}
+                  inputRules={{ required: "This must be requried" }}
+                  inputName={"exchangeFromAmount"}
+                />
+              </TabPanel>
               <TabPanel index={1}>Place Order Content</TabPanel>
             </TabContext>
           </Box>

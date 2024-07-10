@@ -128,7 +128,7 @@ export function ControlledTextField() {
 
         <p>{errors.firstName?.message}</p>
 
-        {/*  Form özelliğini spesifik bir formu submit etmek için kullanabiliriz.*/}
+        {/*  ExchangeForm özelliğini spesifik bir formu submit etmek için kullanabiliriz.*/}
         <button type={"submit"} form={"my-form"}>
           Gönder
         </button>

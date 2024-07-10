@@ -30,7 +30,7 @@ export default function UserInput({
   control,
   rules,
   errors,
-  spinButtonActive,
+  spinButtonActive = true,
   textFieldOptions,
 }) {
   return (
