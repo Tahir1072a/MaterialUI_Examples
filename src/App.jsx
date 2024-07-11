@@ -8,6 +8,8 @@ import {
   CustomSwitch,
   SwitchFeatures,
 } from "./Components/Buttons/SwitchFeatures.jsx";
+import BasicSelect from "./Components/Select/BasicSelect.jsx";
+import ControlledSelect from "./Components/Select/ControlledSelect.jsx";
 
 const Main = styled("main")(({ theme }) => ({
   display: "flex",
@@ -23,7 +25,7 @@ const Main = styled("main")(({ theme }) => ({
 function App() {
   return (
     <Main>
-      <Trade />
+      <ControlledSelect />
     </Main>
   );
 }
