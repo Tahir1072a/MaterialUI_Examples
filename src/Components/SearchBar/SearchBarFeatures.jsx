@@ -19,7 +19,25 @@ const Kbd = styled("kbd")(({ theme }) => ({
   whiteSpace: "nowrap",
 }));
 
-export default function SearchBar() {
+const searchInputProps = {
+  sx: { fontSize: "1.4rem" },
+  startAdornment: (
+    <InputAdornment
+      position={"start"}
+      sx={{ "& svg": { width: "2rem", height: "2rem" } }}
+    >
+      <IoSearchOutline />
+    </InputAdornment>
+  ),
+  endAdornment: (
+    <InputAdornment position={"end"}>
+      {/*  Kısayol tuşumuz.*/}
+      <Kbd>/</Kbd>
+    </InputAdornment>
+  ),
+};
+
+export default function SearchBarFeatures() {
   const { handleSubmit, control } = useForm({
     defaultValues: {
       searchBar: "",
@@ -61,23 +79,7 @@ export default function SearchBar() {
               id={"search-bar"}
               placeholder={"Ara"}
               variant={"outlined"}
-              InputProps={{
-                sx: { fontSize: "1.4rem" },
-                startAdornment: (
-                  <InputAdornment
-                    position={"start"}
-                    sx={{ "& svg": { width: "2rem", height: "2rem" } }}
-                  >
-                    <IoSearchOutline />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position={"end"}>
-                    {/*  Kısayol tuşumuz.*/}
-                    <Kbd>/</Kbd>
-                  </InputAdornment>
-                ),
-              }}
+              InputProps={searchInputProps}
               fullWidth
             />
           )}

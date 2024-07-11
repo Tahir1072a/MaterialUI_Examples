@@ -1,6 +1,17 @@
 import { ClickAwayListener, Grow, Paper, Popper, Stack } from "@mui/material";
 import { useRef, useState } from "react";
 
+/**
+ * Children olrak aldığı içeriği ekranda menu olarak gösterir.
+ *
+ * @param children
+ * @param renderButton
+ * @param placement
+ * @param transformOrigin
+ * @param transitionTimeout
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function CustomMenu({
   children,
   renderButton,
