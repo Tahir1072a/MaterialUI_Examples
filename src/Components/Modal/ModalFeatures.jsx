@@ -20,7 +20,7 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: "2rem",
 }));
 
-// Modal aslında çok basci bir yapı içerir. Bir düğmeye basıldığında açılır bir pencere oluşmasını sağlar.
+// Modal aslında çok basic bir yapı içerir. Bir düğmeye basıldığında açılır bir pencere oluşmasını sağlar.
 // Aynı yaptığım customMenu gibi çalışır. Burada içerisine children olarak aldığı bileşeni ekranda açılır pencere olarak görüntüleyecektir.
 // Burada can alıcı noktaları paylaşacağım.
 export default function ModalFeatures() {
@@ -40,7 +40,7 @@ export default function ModalFeatures() {
         closeAfterTransition
         /* Model açık olduğunda arka planda gösterilecek olan componenti içerir. */
         slots={{ backdrop: Backdrop }}
-        /* Backdrop ile iligli attributeları, özelleştirmeleri alır. */
+        /* Backdrop ile ilgili attributeları, özelleştirmeleri alır. */
         slotProps={{
           backdrop: {
             // Arka planın gölgelenmesi olurken bir tık geçiş sağlar.

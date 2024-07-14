@@ -4,6 +4,7 @@ import { Box, InputAdornment, styled, TextField } from "@mui/material";
 import { IoSearchOutline } from "react-icons/io5";
 import { useEffect, useRef } from "react";
 
+// Kısayol tuşunun gösterileceği alanın css'i
 const Kbd = styled("kbd")(({ theme }) => ({
   backgroundColor: "#eee",
   borderRadius: "3px",

@@ -4,9 +4,10 @@ import { Box, styled, Tabs } from "@mui/material";
 const TabBox = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
+  justifyContent: "center",
 
   padding: theme.spacing(2),
-  gap: theme.spacing(2),
+  gap: theme.spacing(4),
 }));
 
 const CustomPanel = styled(Box)(({ theme }) => ({

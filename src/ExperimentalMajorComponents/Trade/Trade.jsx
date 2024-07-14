@@ -3,14 +3,15 @@ import TabContext, {
   TabPanel,
   TabsWrapper,
 } from "../../Components/Tabs/ReusableTab.jsx";
-import { Box, Button, IconButton, Stack, styled, Tab } from "@mui/material";
+import { Box, IconButton, Stack, styled, Tab } from "@mui/material";
 import theme from "../../Styles/theme.js";
 import { createContext } from "react";
 import CustomMenu from "../../Components/UI/CustomMenu.jsx";
 import TradeOptions from "./TradeOptions.jsx";
 import { CgOptions } from "react-icons/cg";
-import UserInput from "../../Components/UI/UserInput.jsx";
 import ExchangeForm from "./ExchangeForm.jsx";
+import PrimaryBtn from "../../Components/UI/Button/PrimaryBtn.jsx";
+import SwitchBtn from "../../Components/UI/Button/SwitchBtn.jsx";
 
 const TabsStyle = {
   display: "flex",
@@ -45,6 +46,16 @@ const StyledTab = styled(Tab)(({ theme }) => ({
   },
 }));
 
+const SwapPanelBackground = styled(Stack)(({ theme }) => ({
+  alignItems: "center",
+  justifyContent: "center",
+  gap: theme.spacing(8),
+
+  padding: `${theme.spacing(8)} ${theme.spacing(4)}`,
+  background: theme.palette.background.bg500,
+  borderRadius: "12.5px",
+}));
+
 // Birden fazla form olduğu için ve bunları tek bir yerden yönetebilmek için alt bileşenlere bir provider sağlamak amacı ile context oluşturuyoruz.
 const TradeContext = createContext();
 
@@ -66,6 +77,8 @@ export default function Trade() {
       exchangeFromSelected: "",
       exchangeToAmount: "",
       exchangeToSeleted: "",
+      exchangeFromSearchBar: "",
+      exchangeToSearchBar: "",
     },
   });
 
@@ -74,46 +87,78 @@ export default function Trade() {
   return (
     <TradeContext.Provider value={{ control, register, errors, setValue }}>
       <form id={"trade-form"} onSubmit={handleSubmit(onSubmit)}>
-        <Stack>
-          <Box>
-            <TabContext>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <TabsWrapper tabsStyle={TabsStyle}>
-                  <StyledTab label={"Swap"} />
-                  <StyledTab label={"Place Order"} />
-                </TabsWrapper>
-
-                <CustomMenu
-                  transformOrigin={"center"}
-                  renderButton={({ ref, onClick }) => (
-                    <IconButton ref={ref} onClick={onClick}>
-                      <CgOptions />
-                    </IconButton>
-                  )}
+        <TabContext>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <TabsWrapper tabsStyle={TabsStyle}>
+              <StyledTab label={"Swap"} />
+              <StyledTab label={"Place Order"} />
+            </TabsWrapper>
+            {/*Trade ile ilgili ayarları içeren kısmı açan button */}
+            <CustomMenu
+              transformOrigin={"center"}
+              renderButton={({ ref, onClick }) => (
+                <IconButton
+                  ref={ref}
+                  onClick={onClick}
+                  sx={{
+                    border: theme.borders.primary,
+                    " svg": {
+                      width: "1.8rem",
+                      height: "1.8rem",
+                    },
+                  }}
                 >
-                  <TradeOptions context={TradeContext} />
-                </CustomMenu>
-              </Box>
-              {/* TODO: ExchangeForm için ilgili bileşenler hazırlanacak. */}
-              <TabPanel index={0}>
+                  <CgOptions />
+                </IconButton>
+              )}
+            >
+              <TradeOptions context={TradeContext} />
+            </CustomMenu>
+          </Box>
+          {/*Panel 1, Swap paneli */}
+          <TabPanel
+            index={0}
+            panelStyle={{
+              width: 570,
+            }}
+          >
+            <SwapPanelBackground>
+              <Stack gap={theme.spacing(4)} sx={{ position: "relative" }}>
                 <ExchangeForm
+                  inputLbl={"From"}
                   control={control}
                   errors={errors}
                   inputRules={{ required: "This must be requried" }}
                   inputName={"exchangeFromAmount"}
+                  cryptoSearchBarName={"exchangeFromSearchBar"}
                 />
-              </TabPanel>
-              <TabPanel index={1}>Place Order Content</TabPanel>
-            </TabContext>
-          </Box>
-        </Stack>
-        <button type={"submit"}>Submit</button>
+                <SwitchBtn />
+                <ExchangeForm
+                  inputLbl={"To"}
+                  control={control}
+                  errors={errors}
+                  inputName={"exchangeToAmount"}
+                  cryptoSearchBarName={"exchangeToSearchBar"}
+                />
+              </Stack>
+
+              <PrimaryBtn
+                sx={{ width: "90%", marginTop: "1rem", height: "3.5rem" }}
+                btnOptions={{ color: "primary", type: "submit" }}
+                btnText={"Swap"}
+              />
+            </SwapPanelBackground>
+          </TabPanel>
+          <TabPanel index={1} panelStyle={{ width: 570 }}>
+            Place Order Content
+          </TabPanel>
+        </TabContext>
       </form>
     </TradeContext.Provider>
   );

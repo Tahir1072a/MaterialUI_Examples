@@ -7,6 +7,20 @@ const StyledBox = styled(Box)({
   transform: "translate(-50%, -50%) !important",
 });
 
+// Kendi özel tıklanabilir açılır pencerem.
+/**
+ * Açılma ve kapanma olayları dışarıdan yönetilen ve içerisine istediği bir elementi alabilen modal.
+ * @param renderButton - Modal'ın açılması için istenilen bir button koyulabilir.
+ * @param handleClose - Modal'ın kapanmasını kontrol eden bir fonksiyon
+ * @param open - Modal'ın açılma olayını yöneten state
+ * @param modalOptions - MUI modal componentinin ek ayarları için bir parametre
+ * @param modalTimeout - Modal'ın grow animasyonu için gerekli timeout süresi
+ * @param backdropComponent - Pencere açıldığında arka plan render edilecek olan component.
+ * @param backdropTimeout - Backdrop'un animasyon süresi
+ * @param children
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function CustomModal({
   renderButton,
   handleClose,

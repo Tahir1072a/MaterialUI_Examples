@@ -1,5 +1,5 @@
 import SimpleTab from "./Components/Tabs/SimpleTab.jsx";
-import { Button, Paper, styled } from "@mui/material";
+import { Box, Button, Paper, styled } from "@mui/material";
 
 import Trade from "./ExperimentalMajorComponents/Trade/Trade.jsx";
 import BasicMenu from "./Components/OpenedMenus/BasicMenu.jsx";
@@ -14,10 +14,11 @@ import CryptoSelection from "./ExperimentalMajorComponents/Trade/CryptoSelection
 import ModalFeatures from "./Components/Modal/ModalFeatures.jsx";
 import CustomModal from "./Components/UI/CustomModal.jsx";
 import { useState } from "react";
+import ExchangeForm from "./ExperimentalMajorComponents/Trade/ExchangeForm.jsx";
+import SearchBar from "./Components/UI/SearchBar.jsx";
 
 const Main = styled("main")(({ theme }) => ({
   display: "flex",
-  alignItems: "center",
   justifyContent: "center",
 
   width: "100%",
@@ -27,18 +28,9 @@ const Main = styled("main")(({ theme }) => ({
 }));
 
 function App() {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   return (
     <Main>
-      <CustomModal
-        open={open}
-        handleClose={handleClose}
-        renderButton={<Button onClick={handleOpen}>Click me!</Button>}
-      >
-        <Paper sx={{ padding: "2rem" }}>You clicked me! Ah... 💋</Paper>
-      </CustomModal>
+      <Trade />
     </Main>
   );
 }
