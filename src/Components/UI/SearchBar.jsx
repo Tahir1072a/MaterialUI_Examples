@@ -20,6 +20,7 @@ export default function SearchBar({
   name,
   rules,
   control,
+  errors,
   hotKey = "/",
   InputProps = null,
   fullWidth = true,

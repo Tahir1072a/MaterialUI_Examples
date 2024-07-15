@@ -9,7 +9,7 @@ import { createContext } from "react";
 import CustomMenu from "../../Components/UI/CustomMenu.jsx";
 import TradeOptions from "./TradeOptions.jsx";
 import { CgOptions } from "react-icons/cg";
-import ExchangeForm from "./ExchangeForm.jsx";
+import ExchangeForm from "../ResuableComponents/ExchangeForm.jsx";
 import PrimaryBtn from "../../Components/UI/Button/PrimaryBtn.jsx";
 import SwitchBtn from "../../Components/UI/Button/SwitchBtn.jsx";
 
@@ -57,15 +57,17 @@ const SwapPanelBackground = styled(Stack)(({ theme }) => ({
 }));
 
 // Birden fazla form olduğu için ve bunları tek bir yerden yönetebilmek için alt bileşenlere bir provider sağlamak amacı ile context oluşturuyoruz.
-const TradeContext = createContext();
+export const TradeContext = createContext();
 
 export default function Trade() {
   const {
     register,
     handleSubmit,
     control,
+    watch,
     formState: { errors },
     setValue,
+    getValues,
   } = useForm({
     defaultValues: {
       slippageToleranceV1: 0.5,
@@ -75,17 +77,30 @@ export default function Trade() {
       dedicatedRPCs: false,
       exchangeFromAmount: "",
       exchangeFromSelected: "",
+      exchangeFromSearchBar: "",
+      exchangeFromCrypto: "",
       exchangeToAmount: "",
       exchangeToSeleted: "",
-      exchangeFromSearchBar: "",
       exchangeToSearchBar: "",
+      exchangeToCrypto: "",
     },
   });
+
+  const handleSwitchForms = () => {
+    const fromAmount = getValues("exchangeFromAmount");
+    const fromCrypto = getValues("exchangeFromCrypto");
+    setValue("exchangeFromAmount", getValues("exchangeToAmount"));
+    setValue("exchangeFromCrypto", getValues("exchangeToCrypto"));
+    setValue("exchangeToAmount", fromAmount);
+    setValue("exchangeToCrypto", fromCrypto);
+  };
 
   const onSubmit = (data) => console.log(data);
 
   return (
-    <TradeContext.Provider value={{ control, register, errors, setValue }}>
+    <TradeContext.Provider
+      value={{ control, register, errors, setValue, watch, getValues }}
+    >
       <form id={"trade-form"} onSubmit={handleSubmit(onSubmit)}>
         <TabContext>
           <Box
@@ -131,20 +146,20 @@ export default function Trade() {
             <SwapPanelBackground>
               <Stack gap={theme.spacing(4)} sx={{ position: "relative" }}>
                 <ExchangeForm
+                  context={TradeContext}
                   inputLbl={"From"}
-                  control={control}
-                  errors={errors}
                   inputRules={{ required: "This must be requried" }}
                   inputName={"exchangeFromAmount"}
                   cryptoSearchBarName={"exchangeFromSearchBar"}
+                  cryptoSelectionName={"exchangeFromCrypto"}
                 />
-                <SwitchBtn />
+                <SwitchBtn onClick={handleSwitchForms} />
                 <ExchangeForm
+                  context={TradeContext}
                   inputLbl={"To"}
-                  control={control}
-                  errors={errors}
                   inputName={"exchangeToAmount"}
                   cryptoSearchBarName={"exchangeToSearchBar"}
+                  cryptoSelectionName={"exchangeToCrypto"}
                 />
               </Stack>
 
@@ -156,7 +171,7 @@ export default function Trade() {
             </SwapPanelBackground>
           </TabPanel>
           <TabPanel index={1} panelStyle={{ width: 570 }}>
-            Place Order Content
+            Will be come soon...
           </TabPanel>
         </TabContext>
       </form>

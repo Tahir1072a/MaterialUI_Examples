@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, useTransition } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useTransition,
+} from "react";
 import { Box, styled, Tabs } from "@mui/material";
 
 const TabBox = styled(Box)(({ theme }) => ({
@@ -25,11 +31,17 @@ const WrapperContex = createContext();
  * Gerekli fonksiyonları ve değişkenleri provide eden component.
  * @param children
  * @param tabBoxStyle
+ * @param forcedIndex - Current Indexi manuel olarak zorla değiştirme yöntemi.
  * @returns {JSX.Element}
  * @constructor
  */
-export default function TabContext({ children, tabBoxStyle = null }) {
+export default function TabContext({
+  children,
+  tabBoxStyle = null,
+  forcedIndex = null,
+}) {
   const [currentTab, setCurrentTab] = useState(0);
+  const [rememberIndex, setRememberIndex] = useState(0);
 
   const [isPending, startTransaction] = useTransition();
 
@@ -38,6 +50,17 @@ export default function TabContext({ children, tabBoxStyle = null }) {
       setCurrentTab(newIndex);
     });
   }
+
+  useEffect(() => {
+    if (forcedIndex) {
+      setCurrentTab((index) => {
+        setRememberIndex(index);
+        return forcedIndex;
+      });
+    } else if (forcedIndex === null && rememberIndex != null) {
+      setCurrentTab(rememberIndex);
+    }
+  }, [forcedIndex]);
 
   return (
     <WrapperContex.Provider value={{ handleTabChange, currentTab }}>

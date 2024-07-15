@@ -10,11 +10,11 @@ import {
 } from "./Components/Buttons/SwitchFeatures.jsx";
 import BasicSelect from "./Components/Select/BasicSelect.jsx";
 import ControlledSelect from "./Components/Select/ControlledSelect.jsx";
-import CryptoSelection from "./ExperimentalMajorComponents/Trade/CryptoSelection.jsx";
+import CryptoSelection from "./ExperimentalMajorComponents/ResuableComponents/CryptoSelection.jsx";
 import ModalFeatures from "./Components/Modal/ModalFeatures.jsx";
 import CustomModal from "./Components/UI/CustomModal.jsx";
 import { useState } from "react";
-import ExchangeForm from "./ExperimentalMajorComponents/Trade/ExchangeForm.jsx";
+import ExchangeForm from "./ExperimentalMajorComponents/ResuableComponents/ExchangeForm.jsx";
 import SearchBar from "./Components/UI/SearchBar.jsx";
 
 const Main = styled("main")(({ theme }) => ({

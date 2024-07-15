@@ -1,9 +1,16 @@
 import { Button } from "@mui/material";
 import { HiSwitchVertical } from "react-icons/hi";
 
-export default function SwitchBtn({ variant = "contained", sx = {} }) {
+export default function SwitchBtn({
+  variant = "contained",
+  sx = {},
+  onClick,
+  btnOptions = {},
+}) {
   return (
     <Button
+      {...btnOptions}
+      onClick={onClick}
       variant={variant}
       sx={{
         position: "absolute",
