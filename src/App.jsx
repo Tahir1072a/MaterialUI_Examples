@@ -16,6 +16,8 @@ import CustomModal from "./Components/UI/CustomModal.jsx";
 import { useState } from "react";
 import ExchangeForm from "./ExperimentalMajorComponents/ResuableComponents/ExchangeForm.jsx";
 import SearchBar from "./Components/UI/SearchBar.jsx";
+import BasicTable from "./Components/Tables/BasicTable.jsx";
+import TableFeatures from "./Components/Tables/TableFeatures.jsx";
 
 const Main = styled("main")(({ theme }) => ({
   display: "flex",
@@ -30,7 +32,7 @@ const Main = styled("main")(({ theme }) => ({
 function App() {
   return (
     <Main>
-      <Trade />
+      <TableFeatures />
     </Main>
   );
 }
